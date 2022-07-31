@@ -42,7 +42,7 @@ const tailFormItemLayout = {
     },
 };
 
-const Join = () => {
+const SignUp = () => {
     const [form] = Form.useForm();
 
     const onFinish = (values) => {
@@ -118,4 +118,4 @@ const Join = () => {
     );
 };
 
-export default Join;
+export default SignUp;

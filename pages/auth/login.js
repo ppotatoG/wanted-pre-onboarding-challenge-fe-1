@@ -57,7 +57,7 @@ export default function Login() {
                 <Button type="primary" htmlType="submit" className="login-form-button">
                     Log in
                 </Button>
-                Or <a href="./join">register now!</a>
+                Or <a href="./signUp.js">register now!</a>
             </Form.Item>
         </Form>
     );
