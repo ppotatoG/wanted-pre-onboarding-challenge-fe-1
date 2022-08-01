@@ -4,6 +4,8 @@ import styles from '../styles/Home.module.scss'
 
 import { EmailPattern, PasswordPattern } from '../utils/pattern';
 
+
+// todo interface ../types/ 로 옮기기
 interface ddd{
     text: React.KeyboardEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>
 }
@@ -14,6 +16,7 @@ interface errors {
 }
 
 const SignIn: React.FC = () => {
+    // todo 상태값 관리에 type 추가하기
     const intialValues = { email: "", password: "" };
     const [formValues, setFormValues] = useState(intialValues);
     const [formErrors, setFormErrors] = useState({});
@@ -68,6 +71,7 @@ const SignIn: React.FC = () => {
     };
 
     useEffect(() => {
+        // todo 유효성 확인
         console.log(Object.keys(formErrors).length);
         console.log(Object.keys(formErrors))
         console.log(Object.values(formErrors))
@@ -83,10 +87,6 @@ const SignIn: React.FC = () => {
 
     }, [formErrors]);
 
-    const onClickLogin = () => {
-        console.log('click login')
-    }
-
     return(
         <form className={styles.auth} onSubmit={handleSubmit}>
             <div className={styles.auth__item}>
@@ -100,6 +100,7 @@ const SignIn: React.FC = () => {
                     className={formErrors.email && "error"}
                 />
             </div>
+            {/*todo errormessage 두개 다 노출시키기*/}
             {formErrors.email && (
                 <p className={styles.auth__error}>{formErrors.email}</p>
             )}
@@ -115,6 +116,7 @@ const SignIn: React.FC = () => {
                     className={formErrors.password && "input-error"}
                 />
             </div>
+            {/*todo errormessage 두개 다 노출시키기*/}
             {formErrors.password && (
                 <p className={styles.auth__error}>{formErrors.password}</p>
             )}
