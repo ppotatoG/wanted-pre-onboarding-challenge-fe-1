@@ -1,14 +1,18 @@
 import React, {useState} from "react";
+import { EmailPattern } from '../utils/pattern';
 
-const useInputEmail = (initialValue : any, validator : any) => {
+const useInputEmail = (initialValue : any, validator : any, inputRef : boolean) => {
     const [value, setValue] = useState(initialValue);
-    const onChange = (event : React.KeyboardEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement> ) => {
-        setValue(value)
+    const onChange = () => {
+        setValue(value);
 
-        console.log(value);
-        console.dir(event.target);
+        console.dir(value.id);
+        console.dir(initialValue.id);
+
+        inputRef = EmailPattern.test(value);
     }
-    return { value, onChange };
+
+    return { value, onChange, inputRef };
 }
 
 export default useInputEmail;
