@@ -8,7 +8,7 @@ import SignIn from '../../../components/SignIn';
 const App: React.FC = () => {
     return (
         <article className={styles.article}>
-            <h2>Sign In</h2>
+            <h2>TODO LIST</h2>
             <SignIn />
         </article>
     )

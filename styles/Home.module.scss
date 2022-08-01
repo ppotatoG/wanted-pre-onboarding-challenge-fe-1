@@ -30,6 +30,11 @@ $error-color: #f51b39;
         }
         color: $point-color;
     }
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
 }
 
 .auth {
@@ -48,12 +53,12 @@ $error-color: #f51b39;
             padding: 1vw;
             flex: 1 1 80%;
             border: 1px solid $normal-color1;
+            &.error {
+                border: 1px solid $error-color !important;
+            }
             &:focus,
             &:hover {
                 border: 1px solid $point-color;
-            }
-            &.error {
-                border: 1px solid $error-color;
             }
         }
         &:first-child {
@@ -65,5 +70,19 @@ $error-color: #f51b39;
         color: $error-color;
         padding: 0 12vw;
         margin-top: 10px;
+    }
+
+    button {
+        width: 20vw;
+        display: block;
+        margin: 4vw auto 0;
+        padding: 1vw 2vw;
+        background: $point-color;
+        color: #fff;
+        text-align: center;
+        font-size: 2rem;
+        &.disabled {
+            opacity: .2;
+        }
     }
 }

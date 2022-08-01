@@ -3,7 +3,6 @@ import React, {useEffect, useState} from "react";
 import styles from '../styles/Home.module.scss'
 
 import { EmailPattern, PasswordPattern } from '../utils/pattern';
-import useInputEmail from '../common/useInputEmail';
 
 interface ddd{
     text: React.KeyboardEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>
@@ -27,6 +26,7 @@ const SignIn: React.FC = () => {
     };
 
     const handleSubmit = (e : any) => {
+        console.log(e)
         e.preventDefault();
         setFormErrors(validate(formValues));
         setIsSubmitting(true);
@@ -43,23 +43,19 @@ const SignIn: React.FC = () => {
             password: ''
         };
 
-        //이메일 값이 없을시
         if (!values.email) {
             errors.email = "이메일을 입력해주세요";
-            //이메일 정규식 표현이 옳지 않을시
-        } else if (!EmailPattern.test(values.email)) {
+        }
+        else if (!EmailPattern.test(values.email)) {
             errors.email = "올바른 이메일을 입력해주세요.";
         }
 
-        //비밀번호 값이 없을시
         if (!values.password) {
             errors.password = "Cannot be blank";
-            //비밀번호의 길이(length)가 4글자 이하일 때
         } else if (values.password.length < 4) {
             errors.password = "Password must be more than 4 characters";
         }
 
-        //에러를 반환해줘 !
         return errors;
     };
 
@@ -69,13 +65,12 @@ const SignIn: React.FC = () => {
         }
     }, [formErrors]);
 
-    // login 버튼 클릭 이벤트
     const onClickLogin = () => {
         console.log('click login')
     }
 
     return(
-        <form className={styles.auth}>
+        <form className={styles.auth} onSubmit={handleSubmit}>
             <div className={styles.auth__item}>
                 <label htmlFor='input_id'>ID</label>
                 <input
@@ -90,18 +85,28 @@ const SignIn: React.FC = () => {
             {formErrors.email && (
                 <p className={styles.auth__error}>{formErrors.email}</p>
             )}
+
             <div className={styles.auth__item}>
                 <label htmlFor='input_pw'>PW</label>
                 <input
-                    type='password'
-                    name='input_pw'
-                    // value={inputPw}
-                    // onChange={handleInputPw}
+                    type="password"
+                    name="password"
+                    id="password"
+                    value={formValues.password}
+                    onChange={handleChange}
+                    className={formErrors.password && "input-error"}
                 />
             </div>
-            <div>
-                {/*<button type='button' onClick={onClickLogin}>Login</button>*/}
-            </div>
+            {formErrors.password && (
+                <p className={styles.auth__error}>{formErrors.password}</p>
+            )}
+
+            <button
+                // className={styles.auth__button}
+                className={Object.values(formErrors).filter(v => v === '').length !== 2 && 'disabled' || ''}
+                type="submit"
+            >Sign In
+            </button>
         </form>
     )
 };
