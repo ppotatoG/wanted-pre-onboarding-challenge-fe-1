@@ -8,6 +8,11 @@ interface ddd{
     text: React.KeyboardEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>
 }
 
+interface errors {
+    email: string | '';
+    password: string | '';
+}
+
 const SignIn: React.FC = () => {
     const intialValues = { email: "", password: "" };
     const [formValues, setFormValues] = useState(intialValues);
@@ -15,54 +20,67 @@ const SignIn: React.FC = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const submitForm = () => {
-        console.log(formValues);
+        console.log('submitForm')
     };
 
     const handleChange = (e : any) => {
+        e.preventDefault();
+
         const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value });
-        setFormErrors(validate(formValues));
-        setIsSubmitting(true);
+        setFormErrors(validate(name, formValues));
     };
 
     const handleSubmit = (e : any) => {
-        console.log(e)
         e.preventDefault();
-        setFormErrors(validate(formValues));
-        setIsSubmitting(true);
+
+        const { name, value } = e.target;
+        setFormValues({ ...formValues, [name]: value });
+        setFormErrors(validate(name, formValues));
     };
 
-    const validate = (values : any ) => {
-        interface errors {
-            email: string | '';
-            password: string | '';
-        }
-
-        let errors : errors = {
-            email: '',
-            password: ''
+    const validate = (type: string, values : errors) => {
+        const errors : errors = {
+            email : '',
+            password : ''
         };
 
-        if (!values.email) {
-            errors.email = "이메일을 입력해주세요";
-        }
-        else if (!EmailPattern.test(values.email)) {
-            errors.email = "올바른 이메일을 입력해주세요.";
+        if(type === 'email') {
+            if (!values.email) {
+                errors.email = "이메일을 입력해주세요";
+            }
+            else if (!EmailPattern.test(values.email)) {
+                errors.email = "올바른 이메일을 입력해주세요.";
+            }
+
         }
 
-        if (!values.password) {
-            errors.password = "Cannot be blank";
-        } else if (values.password.length < 4) {
-            errors.password = "Password must be more than 4 characters";
+        else if(type === 'password') {
+            if (!values.password) {
+                errors.password = "비밀번호를 입력해주세요";
+            }
+            else if (values.password.length < 8) {
+                errors.password = "올바른 비밀번호를 입력해주세요";
+            }
         }
 
         return errors;
     };
 
     useEffect(() => {
+        console.log(Object.keys(formErrors).length);
+        console.log(Object.keys(formErrors))
+        console.log(Object.values(formErrors))
+
+        if(formErrors.email === '' && formErrors.password === '') {
+            console.log('!!!')
+            setIsSubmitting(true);
+        }
+
         if (Object.keys(formErrors).length === 0 && isSubmitting) {
             submitForm();
         }
+
     }, [formErrors]);
 
     const onClickLogin = () => {
@@ -102,7 +120,6 @@ const SignIn: React.FC = () => {
             )}
 
             <button
-                // className={styles.auth__button}
                 className={Object.values(formErrors).filter(v => v === '').length !== 2 && 'disabled' || ''}
                 type="submit"
             >Sign In
