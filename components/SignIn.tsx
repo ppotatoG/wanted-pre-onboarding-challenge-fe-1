@@ -25,7 +25,6 @@ const SignIn: React.FC = () => {
             wrapperCol={{span: 22}}
             initialValues={{remember: true}}
             onFinish={onFinish}
-            autoComplete="off"
         >
             <Form.Item
                 label="Email"
@@ -62,7 +61,7 @@ const SignIn: React.FC = () => {
                     }
                 ]}
             >
-                <Input.Password placeholder="비밀번호"/>
+                <Input.Password/>
             </Form.Item>
 
             <Form.Item name="remember" valuePropName="checked" wrapperCol={{offset: 8, span: 16}}>
