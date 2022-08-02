@@ -7,7 +7,7 @@ import {userInfoType, FormProps} from '../types/auth'
 
 import axios from 'axios';
 
-const SignIn: React.FC = () => {
+const SignUp: React.FC = () => {
     const initialValues: userInfoType = {email: "", password: ""};
     const [formValues, setFormValues] = useState(initialValues);
     // const [formErrors, setFormErrors] = useState({});
@@ -54,14 +54,18 @@ const SignIn: React.FC = () => {
     }, [formErrors]);
 
     const submitForm = () => {
-        axios.post('http://localhost:8080//users/login', {
+        axios.post('http://localhost:8080/users/create', {
             email: formValues.email,
             password: formValues.password
-        }).then((response) => {
+        }).then( response => {
             console.log(response)
-        }).catch((error) => {
+            console.log(response.data.message)
+            if (response.data.token !== '') {
+                localStorage.setItem(`${formValues.email}`, response.data.token);
+            }
+        }).catch( error => {
             console.log(error)
-            console.log(error.response.data.message)
+            console.log(error.response.data.details)
         })
     };
 
@@ -82,7 +86,6 @@ const SignIn: React.FC = () => {
                     className={formErrors.email && "error"}
                 />
             </div>
-            {/*todo errormessage 두개 다 노출시키기*/}
             {formErrors.email && (
                 <p className={styles.auth__error}>{formErrors.email}</p>
             )}
@@ -98,16 +101,15 @@ const SignIn: React.FC = () => {
                     className={formErrors.password && "input-error"}
                 />
             </div>
-            {/*todo errormessage 두개 다 노출시키기*/}
             {formErrors.password && (
                 <p className={styles.auth__error}>{formErrors.password}</p>
             )}
 
-            <button type="submit">Sign In</button>
+            <button type="submit">Sign Up</button>
             {/*<button*/}
             {/*    className={Object.values(formErrors).filter(v => v === '').length !== 2 && 'disabled' || ''}*/}
             {/*    type="submit"*/}
-            {/*>Sign In*/}
+            {/*>Sign Up*/}
             {/*</button>*/}
         </form>
     );
@@ -125,7 +127,6 @@ const SignIn: React.FC = () => {
                     className={formErrors.email && "error"}
                 />
             </div>
-            {/*todo errormessage 두개 다 노출시키기*/}
             {formErrors.email && (
                 <p className={styles.auth__error}>{formErrors.email}</p>
             )}
@@ -141,19 +142,18 @@ const SignIn: React.FC = () => {
                     className={formErrors.password && "input-error"}
                 />
             </div>
-            {/*todo errormessage 두개 다 노출시키기*/}
             {formErrors.password && (
                 <p className={styles.auth__error}>{formErrors.password}</p>
             )}
 
-            <button type="submit">Sign In</button>
+            <button type="submit">Sign Up</button>
             {/*<button*/}
             {/*    className={Object.values(formErrors).filter(v => v === '').length !== 2 && 'disabled' || ''}*/}
             {/*    type="submit"*/}
-            {/*>Sign In*/}
+            {/*>Sign Up*/}
             {/*</button>*/}
         </form>
     )
 };
 
-export default SignIn;
+export default SignUp;
