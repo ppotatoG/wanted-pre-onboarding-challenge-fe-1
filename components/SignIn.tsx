@@ -2,45 +2,43 @@ import React, {useEffect, useState} from "react";
 
 import styles from '../styles/Home.module.scss'
 
-import { EmailPattern, PasswordPattern } from '../utils/pattern';
-import { userInfoType, FormProps } from '../types/auth'
+import {EmailPattern, PasswordPattern} from '../utils/pattern';
+import {userInfoType, FormProps} from '../types/auth'
 
 import axios from 'axios';
 
 const SignIn: React.FC = () => {
-    const initialValues : userInfoType = { email: "", password: "" };
+    const initialValues: userInfoType = {email: "", password: ""};
     const [formValues, setFormValues] = useState(initialValues);
     // const [formErrors, setFormErrors] = useState({});
     const [formErrors, setFormErrors] = useState<userInfoType>({});
     const [isBtnDisable, setIsBtnDisable] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormValues({ ...formValues, [name]: value });
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const {name, value} = e.target;
+        setFormValues({...formValues, [name]: value});
         setFormErrors(validate(formValues));
     };
 
-    const handleSubmit = (e : React.ChangeEvent<HTMLInputElement>) => {
+    const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         setFormErrors(validate(formValues));
         setIsSubmitting(true);
     };
 
-    const validate = (values : userInfoType) => {
-        let errors : userInfoType = {};
+    const validate = (values: userInfoType) => {
+        let errors: userInfoType = {};
 
         if (!values.email) {
             errors.email = "이메일을 입력해주세요";
-        }
-        else if (!EmailPattern.test(values.email)) {
+        } else if (!EmailPattern.test(values.email)) {
             errors.email = "올바른 이메일을 입력해주세요.";
         }
 
         if (!values.password) {
             errors.password = "비밀번호를 입력해주세요";
-        }
-        else if (!PasswordPattern.test(values.password)) {
+        } else if (!PasswordPattern.test(values.password)) {
             errors.password = "올바른 비밀번호를 입력해주세요";
         }
 
@@ -67,14 +65,14 @@ const SignIn: React.FC = () => {
         })
     };
 
-    const Form : React.FC<FormProps> = ( fnc) : JSX.Element => (
+    const Form: React.FC<FormProps> = (fnc): JSX.Element => (
         <form className={styles.auth} onSubmit={fnc} noValidate>
             {Object.keys(formErrors).length === 0 && isSubmitting && (
                 <span className="success-msg">Signed in successfully</span>
             )}
 
             <div className={styles.auth__item}>
-                <label htmlFor='input_id'>ID</label>
+                <label htmlFor='input_id'>email</label>
                 <input
                     type="email"
                     name="email"
@@ -114,10 +112,10 @@ const SignIn: React.FC = () => {
         </form>
     );
 
-    return(
+    return (
         <form className={styles.auth} onSubmit={handleSubmit}>
             <div className={styles.auth__item}>
-                <label htmlFor='input_id'>ID</label>
+                <label htmlFor='input_id'>email</label>
                 <input
                     type="email"
                     name="email"
