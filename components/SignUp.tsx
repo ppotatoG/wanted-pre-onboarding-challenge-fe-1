@@ -10,6 +10,8 @@ import axios from 'axios';
 const SignUp: React.FC = () => {
     const initialValues: userInfoType = {email: "", password: ""};
     const [formValues, setFormValues] = useState(initialValues);
+
+    // todo change 상태값 생성 필요
     // const [formErrors, setFormErrors] = useState({});
     const [formErrors, setFormErrors] = useState<userInfoType>({});
     const [isBtnDisable, setIsBtnDisable] = useState(false);
@@ -48,12 +50,14 @@ const SignUp: React.FC = () => {
     useEffect(() => {
         console.log(Object.keys(formErrors).length)
         console.log(isSubmitting)
+        // todo submitForm 시점 변경
         if (Object.keys(formErrors).length === 0 && isSubmitting) {
             submitForm();
         }
     }, [formErrors]);
 
     const submitForm = () => {
+        // todo env 설정하기
         axios.post('http://localhost:8080/users/create', {
             email: formValues.email,
             password: formValues.password
@@ -70,6 +74,7 @@ const SignUp: React.FC = () => {
     };
 
     const Form: React.FC<FormProps> = (fnc): JSX.Element => (
+        // todo type error onSubmit
         <form className={styles.auth} onSubmit={fnc} noValidate>
             {Object.keys(formErrors).length === 0 && isSubmitting && (
                 <span className="success-msg">Signed in successfully</span>
@@ -146,6 +151,7 @@ const SignUp: React.FC = () => {
                 <p className={styles.auth__error}>{formErrors.password}</p>
             )}
 
+            {/*// todo error 값에 따라 style="" 추가하기*/}
             <button type="submit">Sign Up</button>
             {/*<button*/}
             {/*    className={Object.values(formErrors).filter(v => v === '').length !== 2 && 'disabled' || ''}*/}
