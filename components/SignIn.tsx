@@ -5,6 +5,8 @@ import styles from '../styles/Home.module.scss'
 import { EmailPattern, PasswordPattern } from '../utils/pattern';
 import { userInfoType, FormProps } from '../types/auth'
 
+import axios from 'axios';
+
 const SignIn: React.FC = () => {
     const initialValues : userInfoType = { email: "", password: "" };
     const [formValues, setFormValues] = useState(initialValues);
@@ -12,10 +14,6 @@ const SignIn: React.FC = () => {
     const [formErrors, setFormErrors] = useState<userInfoType>({});
     const [isBtnDisable, setIsBtnDisable] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
-
-    const submitForm = () => {
-        console.log(formValues);
-    };
 
     const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -56,6 +54,18 @@ const SignIn: React.FC = () => {
             submitForm();
         }
     }, [formErrors]);
+
+    const submitForm = () => {
+        axios.post('http://localhost:8080//users/login', {
+            email: formValues.email,
+            password: formValues.password
+        }).then((response) => {
+            console.log(response)
+        }).catch((error) => {
+            console.log(error)
+            console.log(error.response.data.message)
+        })
+    };
 
     const Form : React.FC<FormProps> = ( fnc) : JSX.Element => (
         <form className={styles.auth} onSubmit={fnc} noValidate>
