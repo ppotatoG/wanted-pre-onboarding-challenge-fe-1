@@ -1,5 +1,10 @@
 import React from "react";
 
-export default interface Auto {
-    inputElement : React.KeyboardEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>;
+export interface userInfoType {
+    email?: string | '';
+    password?: string | '';
+}
+
+export interface FormProps {
+    onSubmit: React.FormEventHandler;
 }
