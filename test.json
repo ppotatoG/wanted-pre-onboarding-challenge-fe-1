@@ -8,33 +8,6 @@
         "createdAt": "2022-07-24T14:25:48.627Z",
         "updatedAt": "2022-07-24T14:25:48.627Z"
       }
-    },
-    {
-      "data": {
-        "title": "제목 변경2",
-        "content": "내용 변경2",
-        "id": "RMfi3XyOKoI5zd0A_bsPL",
-        "createdAt": "2022-07-24T14:25:48.627Z",
-        "updatedAt": "2022-07-24T14:25:48.627Z"
-      }
-    },
-    {
-      "data": {
-        "title": "제목 변경3",
-        "content": "내용 변경3",
-        "id": "RMfi3XyOKoI5zd0A_bsPL",
-        "createdAt": "2022-07-24T14:25:48.627Z",
-        "updatedAt": "2022-07-24T14:25:48.627Z"
-      }
-    },
-    {
-      "data": {
-        "title": "제목 변경4",
-        "content": "내용 변경4",
-        "id": "RMfi3XyOKoI5zd0A_bsPL",
-        "createdAt": "2022-07-24T14:25:48.627Z",
-        "updatedAt": "2022-07-24T14:25:48.627Z"
-      }
     }
   ]
 }

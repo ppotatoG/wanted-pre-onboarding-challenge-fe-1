@@ -4,6 +4,8 @@ import styles from '../styles/Home.module.scss'
 
 import testJson from '../test.json';
 
+import TodoListCard from '../components/TodoListCard';
+
 const TodoList : React.FC = () => {
     const [todoValues, setTodoValues] = useState('');
     const [formValues, setFormValues] = useState('');
@@ -21,6 +23,8 @@ const TodoList : React.FC = () => {
         console.log(value)
     }
 
+    const [cardView, setCardView] = useState(false);
+
     return (
         <div className={styles.todo}>
             <form className={styles.todo__form} onSubmit={handleSubmit}>
@@ -33,9 +37,12 @@ const TodoList : React.FC = () => {
             </form>
             <ul className={styles.todo__list}>
                 {
-                    testJson.todos.map(val => {
+                    testJson.todos.map((val, idx) => {
                         return (
-                            <li>{val.data.title}</li>
+                            <li key={idx}>
+                                <p>{val.data.title}</p>
+                                <TodoListCard/>
+                            </li>
                         )
                     })
                 }
