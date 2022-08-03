@@ -25,6 +25,10 @@ const TodoList : React.FC = () => {
 
     const [cardView, setCardView] = useState(false);
 
+    const handleCardView = (data : any) : void => {
+        setCardView(true);
+    }
+
     return (
         <div className={styles.todo}>
             <form className={styles.todo__form} onSubmit={handleSubmit}>
@@ -39,9 +43,9 @@ const TodoList : React.FC = () => {
                 {
                     testJson.todos.map((val, idx) => {
                         return (
-                            <li key={idx}>
+                            <li key={idx} onClick={handleCardView}>
                                 <p>{val.data.title}</p>
-                                <TodoListCard/>
+                                {cardView && <TodoListCard status={true}></TodoListCard>}
                             </li>
                         )
                     })

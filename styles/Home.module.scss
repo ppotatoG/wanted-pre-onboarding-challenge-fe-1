@@ -173,3 +173,10 @@ $error-color: #f51b39;
         padding: 20px;
     }
 }
+
+.todoCard_none {
+    display: none;
+    * {
+        display: none;
+    }
+}
