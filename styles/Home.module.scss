@@ -1,26 +1,24 @@
 $point-color: #e38a8a;
 $normal-color1: #ecd6d9;
 $normal-color2: #f3c2bd;
-$normal-color3: #997976;
-$normal-color4: #a69777;
 $error-color: #f51b39;
 
 .article {
     min-height: 100vh;
-    padding: 4rem 0;
+    padding: 50px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 2vw;
+    gap: 20px;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
 
     h2 {
         font: {
-            size: 3rem;
+            size: 30px;
             weight: bold;
         }
         color: $point-color;
@@ -80,6 +78,57 @@ $error-color: #f51b39;
     }
 }
 
-.disabled {
-    opacity: .2;
+.todo {
+    width: 90vw;
+    max-width: 500px;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px 0 $normal-color1;
+    &__form {
+        display: flex;
+        height: 50px;
+        line-height: 50px;
+        input {
+            background: $point-color;
+            color: #fff;
+            display: block;
+            width: calc(100% - 50px);
+            height: 100%;
+            padding: 10px;
+            &::placeholder {
+                color: #fff;
+            }
+        }
+        button {
+            width: 50px;
+            height: 50px;
+            display: block;
+            position: relative;
+            background: #666;
+            &::after {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 10px;
+                left: calc(50% - 2px);
+                width: 2px;
+                height: calc(100% - 20px);
+                background: #fff;
+            }
+            &::before {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 10px;
+                left: calc(50% - 2px);
+                width: 2px;
+                height: calc(100% - 20px);
+                background: #fff;
+                transform: rotate(90deg);
+            }
+        }
+    }
+
+    &__list {
+        height: 40vh;
+    }
 }

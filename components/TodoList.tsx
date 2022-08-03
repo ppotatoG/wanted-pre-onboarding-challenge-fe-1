@@ -1,6 +1,38 @@
+import React, { useState } from "react";
+
+import styles from '../styles/Home.module.scss'
+
 const TodoList : React.FC = () => {
+    const [todoValues, setTodoValues] = useState('');
+    const [formValues, setFormValues] = useState('');
+
+    const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault();
+        console.log(formValues)
+        // setTodoValues(e.)
+    };
+
+    const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault();
+        const {name, value} = e.target;
+        setTodoValues(value);
+        console.log(value)
+    }
+
     return (
-        <p>todo list</p>
+        <div className={styles.todo}>
+            <form className={styles.todo__form} onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    placeholder="할 일을 입력하세요"
+                    onChange={handleChange}
+                />
+                <button type="submit"></button>
+            </form>
+            <ul className={styles.todo__list}>
+                <li></li>
+            </ul>
+        </div>
     )
 }
 
