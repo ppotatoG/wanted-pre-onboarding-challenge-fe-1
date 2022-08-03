@@ -82,7 +82,8 @@ $error-color: #f51b39;
     width: 90vw;
     max-width: 500px;
     box-sizing: border-box;
-    box-shadow: 0 0 10px 0 $normal-color1;
+    box-shadow: 0 0 10px 0 rgba($point-color, .4);
+    border-radius: 20px;
     &__form {
         display: flex;
         height: 50px;
@@ -130,5 +131,14 @@ $error-color: #f51b39;
 
     &__list {
         height: 40vh;
+        overflow: auto;
+        li {
+            height: 40px;
+            line-height: 40px;
+            padding: 0 10px;
+            &:hover {
+                background: rgba($normal-color2, .4);
+            }
+        }
     }
 }

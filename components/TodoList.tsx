@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import styles from '../styles/Home.module.scss'
 
+import testJson from '../test.json';
+
 const TodoList : React.FC = () => {
     const [todoValues, setTodoValues] = useState('');
     const [formValues, setFormValues] = useState('');
@@ -30,7 +32,13 @@ const TodoList : React.FC = () => {
                 <button type="submit"></button>
             </form>
             <ul className={styles.todo__list}>
-                <li></li>
+                {
+                    testJson.todos.map(val => {
+                        return (
+                            <li>{val.data.title}</li>
+                        )
+                    })
+                }
             </ul>
         </div>
     )
