@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from '../../styles/Home.module.scss'
 
-// root 지정
+// todo root 지정
 import TodoList from '../../components/TodoList';
 
 const App: React.FC = () => {
