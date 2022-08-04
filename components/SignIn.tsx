@@ -1,157 +1,95 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useCallback} from "react";
 
 import styles from '../styles/Home.module.scss'
+import axios from 'axios';
 
 import {EmailPattern, PasswordPattern} from '../utils/pattern';
 import {userInfoType, FormProps} from '../types/auth'
 
-import axios from 'axios';
-
 const SignIn: React.FC = () => {
-    const initialValues: userInfoType = {email: "", password: ""};
-    const [formValues, setFormValues] = useState(initialValues);
-    // const [formErrors, setFormErrors] = useState({});
-    const [formErrors, setFormErrors] = useState<userInfoType>({});
-    const [isBtnDisable, setIsBtnDisable] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [email, setEmail] = useState('');
+    const [emailError, setEmailError] = useState(true);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const {name, value} = e.target;
-        setFormValues({...formValues, [name]: value});
-        setFormErrors(validate(formValues));
-    };
+    const onChangeEmailCheck = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        const {value} = e.target;
 
-    const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault();
-        setFormErrors(validate(formValues));
-        setIsSubmitting(true);
-    };
+        setEmail(value);
+        setEmailError(validate('email', value));
+    }, [email]);
 
-    const validate = (values: userInfoType) => {
-        let errors: userInfoType = {};
+    const [password, setPassword] = useState('');
 
-        if (!values.email) {
-            errors.email = "이메일을 입력해주세요";
-        } else if (!EmailPattern.test(values.email)) {
-            errors.email = "올바른 이메일을 입력해주세요.";
+    const [passwordError, setPasswordError] = useState(true);
+    const onChangePasswordCheck = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        const {value} = e.target;
+
+        setPassword(value);
+        setPasswordError(validate('password', value));
+
+    }, [password]);
+
+    const [emailErrorMessage, setEmailErrorMessage] = useState('');
+    const [passwordErrorMessage, setPwErrorMessage] = useState('');
+
+    const validate = (type: string, str: string) : boolean => {
+        const errors: userInfoType = {};
+
+        if (type === 'email') {
+            if (!str) {
+                errors.email = "이메일을 입력해주세요";
+                setEmailErrorMessage(errors.email);
+
+                return false;
+            } else if (!EmailPattern.test(str)) {
+                errors.email = "올바른 이메일을 입력해주세요.";
+                setEmailErrorMessage(errors.email);
+
+                return false;
+            }
+
+        } else if (type === 'password') {
+            if (!str) {
+                errors.password = "비밀번호를 입력해주세요";
+                setPwErrorMessage(errors.password);
+
+                return false;
+            } else if (str.length < 8) {
+                errors.password = "올바른 비밀번호를 입력해주세요";
+                setPwErrorMessage(errors.password);
+
+                return false;
+            }
         }
 
-        if (!values.password) {
-            errors.password = "비밀번호를 입력해주세요";
-        } else if (!PasswordPattern.test(values.password)) {
-            errors.password = "올바른 비밀번호를 입력해주세요";
-        }
-
-        return errors;
+        return true;
     };
-
-    useEffect(() => {
-        console.log(Object.keys(formErrors).length)
-        console.log(isSubmitting)
-        if (Object.keys(formErrors).length === 0 && isSubmitting) {
-            submitForm();
-        }
-    }, [formErrors]);
-
-    const submitForm = () => {
-        axios.post('http://localhost:8080//users/login', {
-            email: formValues.email,
-            password: formValues.password
-        }).then((response) => {
-            console.log(response)
-        }).catch((error) => {
-            console.log(error)
-            console.log(error.response.data.message)
-        })
-    };
-
-    const Form: React.FC<FormProps> = (fnc): JSX.Element => (
-        <form className={styles.auth} onSubmit={fnc} noValidate>
-            {Object.keys(formErrors).length === 0 && isSubmitting && (
-                <span className="success-msg">Signed in successfully</span>
-            )}
-
-            <div className={styles.auth__item}>
-                <label htmlFor='input_id'>email</label>
-                <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    value={formValues.email}
-                    onChange={handleChange}
-                    className={formErrors.email && "error"}
-                />
-            </div>
-            {/*todo errormessage 두개 다 노출시키기*/}
-            {formErrors.email && (
-                <p className={styles.auth__error}>{formErrors.email}</p>
-            )}
-
-            <div className={styles.auth__item}>
-                <label htmlFor='input_pw'>PW</label>
-                <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    value={formValues.password}
-                    onChange={handleChange}
-                    className={formErrors.password && "input-error"}
-                />
-            </div>
-            {/*todo errormessage 두개 다 노출시키기*/}
-            {formErrors.password && (
-                <p className={styles.auth__error}>{formErrors.password}</p>
-            )}
-
-            <button type="submit">Sign In</button>
-            {/*<button*/}
-            {/*    className={Object.values(formErrors).filter(v => v === '').length !== 2 && 'disabled' || ''}*/}
-            {/*    type="submit"*/}
-            {/*>Sign In*/}
-            {/*</button>*/}
-        </form>
-    );
 
     return (
-        <form className={styles.auth} onSubmit={handleSubmit}>
+        <form className={styles.auth}>
             <div className={styles.auth__item}>
-                <label htmlFor='input_id'>email</label>
+                <label htmlFor='email'>이메일</label>
                 <input
                     type="email"
                     name="email"
                     id="email"
-                    value={formValues.email}
-                    onChange={handleChange}
-                    className={formErrors.email && "error"}
+                    required
+                    value={email}
+                    onChange={onChangeEmailCheck}
                 />
             </div>
-            {/*todo errormessage 두개 다 노출시키기*/}
-            {formErrors.email && (
-                <p className={styles.auth__error}>{formErrors.email}</p>
-            )}
-
+            {!emailError && <p className={styles.errorMessage}>{emailErrorMessage}</p>}
             <div className={styles.auth__item}>
-                <label htmlFor='input_pw'>PW</label>
+                <label htmlFor='password'>비밀번호</label>
                 <input
                     type="password"
                     name="password"
                     id="password"
-                    value={formValues.password}
-                    onChange={handleChange}
-                    className={formErrors.password && "input-error"}
+                    required
+                    value={password}
+                    onChange={onChangePasswordCheck}
                 />
             </div>
-            {/*todo errormessage 두개 다 노출시키기*/}
-            {formErrors.password && (
-                <p className={styles.auth__error}>{formErrors.password}</p>
-            )}
-
-            <button type="submit">Sign In</button>
-            {/*<button*/}
-            {/*    className={Object.values(formErrors).filter(v => v === '').length !== 2 && 'disabled' || ''}*/}
-            {/*    type="submit"*/}
-            {/*>Sign In*/}
-            {/*</button>*/}
+            {!passwordError && <p className={styles.errorMessage}>{passwordErrorMessage}</p>}
         </form>
     )
 };
