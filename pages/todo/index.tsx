@@ -1,17 +1,25 @@
-import React from "react";
-
-import styles from '../../styles/Home.module.scss'
+import React, { useState } from "react";
 
 // todo root 지정
-import TodoList from '../../components/TodoList';
+import styles from '../../styles/Home.module.scss'
 
-const App: React.FC = () => {
+import TodoList from '../../components/TodoList';
+import SignIn from '../../components/SignIn';
+
+import testJson from '../../test.json';
+
+const Todo: React.FC = () => {
     return (
         <article className={styles.article}>
             <h2>TODO LIST</h2>
-            <TodoList />
-    </article>
+            {
+                testJson.users
+                // testJson.users.login
+                && <TodoList/>
+                || <SignIn />
+            }
+        </article>
     )
 };
 
-export default App;
+export default Todo;
