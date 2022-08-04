@@ -8,24 +8,27 @@ import {userInfoType, FormProps} from '../types/auth'
 
 const SignIn: React.FC = () => {
     const [email, setEmail] = useState('');
-    const [emailError, setEmailError] = useState(true);
+    const [emailError, setEmailError] = useState(false);
 
     const onChangeEmailCheck = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        const {value} = e.target;
+        const { name, value } = e.target;
 
         setEmail(value);
-        setEmailError(validate('email', value));
+        setFormValues({...formValues, [name]: value});
+
+        setEmailError(validate(name, value));
     }, [email]);
 
     const [password, setPassword] = useState('');
 
-    const [passwordError, setPasswordError] = useState(true);
+    const [passwordError, setPasswordError] = useState(false);
     const onChangePasswordCheck = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        const {value} = e.target;
+        const { name, value } = e.target;
 
         setPassword(value);
-        setPasswordError(validate('password', value));
+        setFormValues({...formValues, [name]: value});
 
+        setPasswordError(validate(name, value));
     }, [password]);
 
     const [emailErrorMessage, setEmailErrorMessage] = useState('');
@@ -64,8 +67,24 @@ const SignIn: React.FC = () => {
         return true;
     };
 
+    const [formValues, setFormValues] = useState({email:'', password:''});
+
+    const onSubmit = ( e: React.ChangeEvent<HTMLInputElement> ) => {
+        e.preventDefault();
+
+        axios.post('http://localhost:8080/users/login', {
+            email: formValues.email,
+            password: formValues.password
+        }).then((response) => {
+            console.log(response)
+        }).catch((error) => {
+            console.log(error)
+            console.log(error.response.data.message)
+        })
+    }
+
     return (
-        <form className={styles.auth}>
+        <form className={styles.auth} onSubmit={onSubmit}>
             <div className={styles.auth__item}>
                 <label htmlFor='email'>이메일</label>
                 <input
@@ -90,6 +109,12 @@ const SignIn: React.FC = () => {
                 />
             </div>
             {!passwordError && <p className={styles.errorMessage}>{passwordErrorMessage}</p>}
+
+            {
+                !emailError || !passwordError
+                ? <button className={styles.disable}>로그인</button>
+                : <button>로그인</button>
+            }
         </form>
     )
 };
