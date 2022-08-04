@@ -166,6 +166,7 @@ $error-color: #f51b39;
     &__contents {
         z-index: 1;
         width: 100%;
+        max-width: 600px;
         height: 40vh;
         overflow-y: auto;
         margin: 0 auto;
