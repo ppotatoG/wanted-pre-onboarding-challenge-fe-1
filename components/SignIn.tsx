@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useCallback} from "react";
 
+// todo root 지정
 import styles from '../styles/Home.module.scss'
 import axios from 'axios';
 
@@ -7,34 +8,44 @@ import {EmailPattern, PasswordPattern} from '../utils/pattern';
 import {userInfoType, FormProps} from '../types/auth'
 
 const SignIn: React.FC = () => {
+    const [formValues, setFormValues] = useState({email: '', password: ''});
+
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState(false);
 
     const onChangeEmailCheck = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
 
         setEmail(value);
+        
+        // todo change마다 값 초기화되는 오류
         setFormValues({...formValues, [name]: value});
 
         setEmailError(validate(name, value));
+
+        console.log(formValues)
     }, [email]);
 
     const [password, setPassword] = useState('');
-
     const [passwordError, setPasswordError] = useState(false);
+
     const onChangePasswordCheck = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
 
         setPassword(value);
+        
+        // todo change마다 값 초기화되는 오류
         setFormValues({...formValues, [name]: value});
 
         setPasswordError(validate(name, value));
+
+        console.log(formValues)
     }, [password]);
 
     const [emailErrorMessage, setEmailErrorMessage] = useState('');
     const [passwordErrorMessage, setPwErrorMessage] = useState('');
 
-    const validate = (type: string, str: string) : boolean => {
+    const validate = (type: string, str: string): boolean => {
         const errors: userInfoType = {};
 
         if (type === 'email') {
@@ -67,20 +78,22 @@ const SignIn: React.FC = () => {
         return true;
     };
 
-    const [formValues, setFormValues] = useState({email:'', password:''});
-
-    const onSubmit = ( e: React.ChangeEvent<HTMLInputElement> ) => {
+    const onSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
+        console.log(formValues)
 
-        axios.post('http://localhost:8080/users/login', {
-            email: formValues.email,
-            password: formValues.password
-        }).then((response) => {
-            console.log(response)
-        }).catch((error) => {
-            console.log(error)
-            console.log(error.response.data.message)
-        })
+        if (emailError && passwordError) {
+            // todo env 설정하기
+            axios.post('http://localhost:8080/users/login', {
+                email: formValues.email,
+                password: formValues.password
+            }).then((response) => {
+                console.log(response)
+            }).catch((error) => {
+                console.log(error)
+                console.log(error.response.data.message)
+            })
+        }
     }
 
     return (
@@ -110,11 +123,15 @@ const SignIn: React.FC = () => {
             </div>
             {!passwordError && <p className={styles.errorMessage}>{passwordErrorMessage}</p>}
 
-            {
-                !emailError || !passwordError
-                ? <button className={styles.disable}>로그인</button>
-                : <button>로그인</button>
-            }
+            <div className={styles.btn_wrap}>
+                {
+                    !emailError || !passwordError
+                        ? <button type="submit" className={styles.btn_wrap__item} style={{opacity: .5}}>로그인</button>
+                        : <button type="submit" className={styles.btn_wrap__item}>로그인</button>
+                }
+
+                <a className={styles.btn_wrap__item} href="../auth/SignUp">회원가입</a>
+            </div>
         </form>
     )
 };
