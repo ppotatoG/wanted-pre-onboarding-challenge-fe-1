@@ -31,7 +31,7 @@ const TodoList : React.FC = () => {
 
     return (
         <div className={styles.todo}>
-            <form className={styles.todo__form} onSubmit={handleSubmit}>
+            <form className={styles.todo__form}>
                 <input
                     type="text"
                     placeholder="할 일을 입력하세요"
@@ -45,7 +45,7 @@ const TodoList : React.FC = () => {
                         return (
                             <li key={idx} onClick={handleCardView}>
                                 <p>{val.data.title}</p>
-                                {cardView && <TodoListCard status={true}></TodoListCard>}
+                                {cardView && <TodoListCard/>}
                             </li>
                         )
                     })

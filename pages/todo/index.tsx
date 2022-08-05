@@ -12,12 +12,13 @@ const Todo: React.FC = () => {
     return (
         <article className={styles.article}>
             <h2>TODO LIST</h2>
-            {
-                testJson.users
-                // testJson.users.login
-                && <TodoList/>
-                || <SignIn />
-            }
+            <TodoList/>
+            {/*{*/}
+            {/*    testJson.users*/}
+            {/*    // testJson.users.login*/}
+            {/*    && <TodoList/>*/}
+            {/*    || <SignIn />*/}
+            {/*}*/}
         </article>
     )
 };

@@ -81,6 +81,7 @@ $error-color: #f51b39;
             width: calc(100% - 50px);
             height: 100%;
             padding: 10px;
+            box-sizing: border-box;
             &::placeholder {
                 color: #fff;
             }
