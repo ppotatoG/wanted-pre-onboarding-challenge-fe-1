@@ -175,15 +175,12 @@ $error-color: #f51b39;
     margin: 10px 0 0 100px;
 }
 
-.disable {
-    opacity: .4;
-}
-
 .btn_wrap {
     display: flex;
     justify-content: center;
     gap: 20px;
     align-items: center;
+    margin-top: 30px;
     &__item {
         width: fit-content;
         display: block;
@@ -192,5 +189,8 @@ $error-color: #f51b39;
         color: #fff;
         text-align: center;
         cursor: pointer;
+        &[disabled] {
+            opacity: .4;
+        }
     }
 }
