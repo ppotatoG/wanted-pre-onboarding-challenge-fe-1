@@ -16,7 +16,7 @@ $error-color: #f51b39;
     max-width: 1000px;
     margin: 0 auto;
     box-sizing: border-box;
-
+    position: relative;
     h2 {
         font: {
             size: 30px;
@@ -182,6 +182,27 @@ $error-color: #f51b39;
     align-items: center;
     margin-top: 30px;
     &__item {
+        width: fit-content;
+        display: block;
+        padding: 10px 40px;
+        background: $point-color;
+        color: #fff;
+        text-align: center;
+        cursor: pointer;
+        &[disabled] {
+            opacity: .4;
+        }
+    }
+}
+
+.user_state {
+    position: absolute;
+    top: 100px;
+    right: 100px;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    a {
         width: fit-content;
         display: block;
         padding: 10px 40px;
