@@ -60,9 +60,6 @@ const SignUp: React.FC = () => {
             }).then( response => {
                 console.log(response)
                 console.log(response.data.message)
-                if (response.data.token !== '') {
-                    localStorage.setItem(`${email}`, response.data.token);
-                }
             }).catch( error => {
                 console.log(error)
                 console.log(error.response.data.details)

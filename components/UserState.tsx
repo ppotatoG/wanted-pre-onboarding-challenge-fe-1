@@ -1,15 +1,23 @@
 import styles from '../styles/Home.module.scss'
 
-const UserState = (isUser : string | null) : JSX.Element | React.FC => {
+interface isUserType {
+    isUser: string | null
+}
+const UserState = (isUser : isUserType) : JSX.Element | React.FC => {
+    console.log(isUser.isUser);
+
     const logout = () => {
         localStorage.removeItem('isUser')
-        window.location.reload();
+        alert('setTimeout');
+        setTimeout(() => {
+            window.location.reload();
+        }, 500)
     };
 
     return (
         <div className={styles.user_state}>
             {
-                !isUser
+                isUser
                 && <button className={styles.btn_wrap__item} onClick={logout}>로그아웃</button>
             }
         </div>

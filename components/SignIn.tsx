@@ -55,14 +55,21 @@ const SignIn: React.FC = () => {
             email: email,
             password: password
         }).then((response) => {
-            alert(response.data.message);
             // TODO: todolist로 이동 (refresh)
+            console.log(response.data.token)
+            console.log(response)
+            localStorage.setItem('isUser', response.data.token);
 
+            alert('setTimeout');
+            setTimeout(() => {
+                window.location.reload();
+            }, 500)
+            // alert(response.data.message);
         }).catch((error) => {
-            alert(error.response.data.details);
+            // alert(error.response.data.details);
         })
     }
-    // @ts-ignore
+
     return (
         <form className={styles.auth} onSubmit={onSubmit}>
             <div className={styles.auth__item}>
