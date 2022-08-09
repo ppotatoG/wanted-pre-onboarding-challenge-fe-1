@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import {EmailPattern} from '../utils/pattern';
 
-const SignIn: React.FC = () => {
+const SignUp: React.FC = () => {
     // TODO: 중복코드 common
 
     const [email, setEmail] = useState<string>('');
@@ -110,4 +110,4 @@ const SignIn: React.FC = () => {
     )
 };
 
-export default SignIn;
+export default SignUp;
