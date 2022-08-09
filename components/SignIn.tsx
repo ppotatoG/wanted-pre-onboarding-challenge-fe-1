@@ -1,22 +1,25 @@
-import React, {useEffect, useState, useCallback} from "react";
+import React, {useState} from "react";
 
 import styles from '../styles/Home.module.scss'
 import axios from 'axios';
 
-import {EmailPattern, PasswordPattern} from '../utils/pattern';
-import {userInfoType, FormProps} from '../types/auth'
+import {EmailPattern} from '../utils/pattern';
 
 const SignIn: React.FC = () => {
-    const [email, setEmail] = useState('');
-    const [emailErrorMessage, setEmailErrorMessage] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+    const [email, setEmail] = useState<string>('');
+    const [emailError, setEmailError] = useState<boolean>(false);
+    const [emailErrorMessage, setEmailErrorMessage] = useState<string | ''>('');
+
+    const [password, setPassword] = useState<string>('');
+    const [passwordError, setPasswordError] = useState<boolean>(false);
+    const [passwordErrorMessage, setPasswordErrorMessage] = useState<string | ''>('');
 
     const onChangeEmailCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target;
 
         setEmail(value);
         setEmailErrorMessage(validate(name, value));
+        setEmailError(emailErrorMessage === '');
     };
 
     const onChangePasswordCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,6 +27,7 @@ const SignIn: React.FC = () => {
 
         setPassword(value);
         setPasswordErrorMessage(validate(name, value));
+        setPasswordError(passwordErrorMessage === '');
     };
 
     const validate = (type: string, str: string): string => {
@@ -44,7 +48,7 @@ const SignIn: React.FC = () => {
         return '';
     };
 
-    const onSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
 
         await axios.post('http://localhost:8080/users/login', {
@@ -58,6 +62,7 @@ const SignIn: React.FC = () => {
             alert(error.response.data.details);
         })
     }
+    // @ts-ignore
     return (
         <form className={styles.auth} onSubmit={onSubmit}>
             <div className={styles.auth__item}>
@@ -88,7 +93,7 @@ const SignIn: React.FC = () => {
 
             <div className={styles.btn_wrap}>
                 <button
-                    disabled={emailErrorMessage || passwordErrorMessage}
+                    disabled={!emailError || !passwordError}
                     className={styles.btn_wrap__item}>
                     로그인
                 </button>
