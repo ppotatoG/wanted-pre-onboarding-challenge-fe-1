@@ -10,23 +10,22 @@ const TodoList : React.FC = () => {
 
     const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
+        console.log('handleSubmit')
     };
 
     const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         const {name, value} = e.target;
         setTodoValues(value);
+        console.log('handleChange')
     }
 
     const [modalView, setModalView] = useState(false);
 
-    const handleModalView = (bool : boolean) : any => {
-        setModalView(bool);
-    }
+    console.log('TodoList render')
 
     return (
         <div className={styles.todo}>
-
             <form className={styles.todo__form}>
                 <input
                     type="text"
@@ -39,15 +38,12 @@ const TodoList : React.FC = () => {
                 {
                     testJson.todos.map((val, idx) => {
                         return (
-                            <li key={idx} onClick={handleModalView(true)}>
+                            <li key={idx} onClick={() => setModalView(true)}>
                                 <p>{val.data.title}</p>
-                                {
-                                    modalView
-                                    && <TodoListModal
-                                        modalView={modalView}
-                                        handleModalView={handleModalView}
-                                    />
-                                }
+                                <TodoListModal
+                                    modalView={modalView}
+                                    setModalView={setModalView}
+                                />
                             </li>
                         )
                     })
