@@ -15,10 +15,8 @@ const Todo: React.FC = () => {
 
     useEffect(() => {
         isUser = localStorage.isUser;
-        console.log(isUser !== null);
+        // console.log(isUser !== null);
     },[isUser]);
-
-    console.log(isUser);
 
     return (
         <article className={styles.article}>

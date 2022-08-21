@@ -12,15 +12,12 @@ const TodoList : React.FC = () => {
 
     const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
-        console.log(formValues)
-        // setTodoValues(e.)
     };
 
     const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         const {name, value} = e.target;
         setTodoValues(value);
-        console.log(value)
     }
 
     const [cardView, setCardView] = useState(false);

@@ -4,8 +4,6 @@ interface isUserType {
     isUser: string | null
 }
 const UserState = (isUser : isUserType) : JSX.Element | React.FC => {
-    console.log(isUser.isUser);
-
     const logout = () => {
         localStorage.removeItem('isUser')
         alert('setTimeout');
