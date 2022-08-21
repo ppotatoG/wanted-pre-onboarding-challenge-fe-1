@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 
 import { FaBeer } from 'react-icons/fa';
-
 import styles from '../styles/Home.module.scss'
-
 import testJson from '../test.json';
 
-const TodoListCard = () => {
+const TodoListModal = ( ) => {
     const [reviseList, setReviseList] = useState(false);
 
     const updateTodo = () => {
@@ -72,4 +70,4 @@ const TodoListCard = () => {
     )
 }
 
-export default TodoListCard;
+export default TodoListModal;

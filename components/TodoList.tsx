@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 
 import styles from '../styles/Home.module.scss'
-
 import testJson from '../test.json';
-
-import TodoListCard from '../components/TodoListCard';
+import TodoListModal from '../components/todoListModal';
+import Modal from 'react-modal';
 
 const TodoList : React.FC = () => {
     const [todoValues, setTodoValues] = useState('');
@@ -20,10 +19,10 @@ const TodoList : React.FC = () => {
         setTodoValues(value);
     }
 
-    const [cardView, setCardView] = useState(false);
+    const [modalOpen, setModalOpne] = useState(false);
 
-    const handleCardView = (data : any) : void => {
-        setCardView(true);
+    const handleCardView = () => {
+        setModalOpne(true);
     }
 
     return (
@@ -42,7 +41,12 @@ const TodoList : React.FC = () => {
                         return (
                             <li key={idx} onClick={handleCardView}>
                                 <p>{val.data.title}</p>
-                                {cardView && <TodoListCard/>}
+                                <Modal
+                                    isOpen={modalOpen}
+                                    ariaHideApp={false}
+                                >
+                                    <TodoListModal/>
+                                </Modal>
                             </li>
                         )
                     })
