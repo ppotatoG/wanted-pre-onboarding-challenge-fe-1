@@ -4,16 +4,16 @@ import { FaBeer } from 'react-icons/fa';
 import styles from '../styles/Home.module.scss'
 import testJson from '../test.json';
 
-const TodoListModal = ( ) => {
+const TodoListModal = (modalView : boolean, handleModalView : any ) => {
     const [reviseList, setReviseList] = useState(false);
 
     const updateTodo = () => {
         console.log('updateTodo');
-    }
+    };
 
     const deleteTodo = () => {
         console.log('deleteTodo');
-    }
+    };
 
     const [content, setContent] = useState('');
     const [contentError, setContentError] = useState(false);
@@ -31,16 +31,17 @@ const TodoListModal = ( ) => {
     const handleReviseCancle = () => {
         console.log('dtd')
         setReviseList(false)
-    }
+    };
 
     const handleRevise = () => {
         setReviseList(true)
-    }
+    };
+
     return (
         <div className={styles.todoCard}>
-            <div className={styles.todoCard__bg}></div>
+            <div className={styles.todoCard__bg} onClick={handleModalView(false)}></div>
             <div className={styles.todoCard__contents}>
-                <button>닫기</button>
+                <button onClick={handleModalView(false)}>닫기</button>
                 <p>{testJson.todos[0].data.title}</p>
                 {
                     reviseList

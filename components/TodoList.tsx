@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import styles from '../styles/Home.module.scss'
 import testJson from '../test.json';
 import TodoListModal from '../components/todoListModal';
-import Modal from 'react-modal';
 
 const TodoList : React.FC = () => {
     const [todoValues, setTodoValues] = useState('');
@@ -19,14 +18,15 @@ const TodoList : React.FC = () => {
         setTodoValues(value);
     }
 
-    const [modalOpen, setModalOpne] = useState(false);
+    const [modalView, setModalView] = useState(false);
 
-    const handleCardView = () => {
-        setModalOpne(true);
+    const handleModalView = (bool : boolean) : any => {
+        setModalView(bool);
     }
 
     return (
         <div className={styles.todo}>
+
             <form className={styles.todo__form}>
                 <input
                     type="text"
@@ -39,14 +39,15 @@ const TodoList : React.FC = () => {
                 {
                     testJson.todos.map((val, idx) => {
                         return (
-                            <li key={idx} onClick={handleCardView}>
+                            <li key={idx} onClick={handleModalView(true)}>
                                 <p>{val.data.title}</p>
-                                <Modal
-                                    isOpen={modalOpen}
-                                    ariaHideApp={false}
-                                >
-                                    <TodoListModal/>
-                                </Modal>
+                                {
+                                    modalView
+                                    && <TodoListModal
+                                        modalView={modalView}
+                                        handleModalView={handleModalView}
+                                    />
+                                }
                             </li>
                         )
                     })
