@@ -22,7 +22,7 @@ const TodoList : React.FC = () => {
 
     const [modalView, setModalView] = useState(false);
 
-    console.log('TodoList render')
+    console.log(modalView)
 
     return (
         <div className={styles.todo}>

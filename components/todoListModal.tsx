@@ -37,7 +37,7 @@ const TodoListModal = ( { modalView, setModalView } ) => {
         setReviseList(true)
     };
 
-    console.log('modalView')
+    console.log(modalView)
 
     return (
         modalView &&
