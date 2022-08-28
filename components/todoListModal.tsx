@@ -37,8 +37,6 @@ const TodoListModal = ( { modalView, setModalView } ) => {
         setReviseList(true)
     };
 
-    console.log(modalView)
-
     return (
         modalView &&
         <div className={styles.todoCard}>

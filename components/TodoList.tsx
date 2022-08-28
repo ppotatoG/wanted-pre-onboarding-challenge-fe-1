@@ -22,8 +22,6 @@ const TodoList : React.FC = () => {
 
     const [modalView, setModalView] = useState(false);
 
-    console.log(modalView)
-
     return (
         <div className={styles.todo}>
             <form className={styles.todo__form}>
@@ -40,15 +38,16 @@ const TodoList : React.FC = () => {
                         return (
                             <li key={idx} onClick={() => setModalView(true)}>
                                 <p>{val.data.title}</p>
-                                <TodoListModal
-                                    modalView={modalView}
-                                    setModalView={setModalView}
-                                />
                             </li>
                         )
                     })
                 }
             </ul>
+
+            <TodoListModal
+                modalView={modalView}
+                setModalView={setModalView}
+            />
         </div>
     )
 }
