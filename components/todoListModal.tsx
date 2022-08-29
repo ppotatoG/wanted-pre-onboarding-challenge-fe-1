@@ -8,7 +8,12 @@ import testJson from 'test.json';
 import { faXmark, faTrashCan, faBan, faFileArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const TodoListModal = ({modalView, setModalView}) => {
+interface props {
+    modalView: boolean,
+    setModalView: Function
+};
+
+const TodoListModal : React.FC<props> = ({modalView, setModalView}) : any => {
     const [reviseList, setReviseList] = useState(false);
 
     const [content, setContent] = useState(testJson.todos[0].data.content);
@@ -63,15 +68,15 @@ const TodoListModal = ({modalView, setModalView}) => {
                         />
                         <div className={styles.btn_wrap}>
                             <button className={styles.btn_wrap__item} onClick={updateTodo}>
-                                <FontAwesomeIcon icon={faFileArrowUp} style={{color: '#fff'}, {marginRight: '10px'}}/>
+                                <FontAwesomeIcon icon={faFileArrowUp} style={{color: '#fff'}}/>
                                 수정
                             </button>
                             <button className={styles.btn_wrap__item} onClick={deleteTodo}>
-                                <FontAwesomeIcon icon={faTrashCan} style={{color: '#fff'}, {marginRight: '10px'}}/>
+                                <FontAwesomeIcon icon={faTrashCan} style={{color: '#fff'}}/>
                                 삭제
                             </button>
                             <button className={styles.btn_wrap__item} onClick={handleReviseCancle}>
-                                <FontAwesomeIcon icon={faBan} style={{color: '#fff'}, {marginRight: '10px'}}/>
+                                <FontAwesomeIcon icon={faBan} style={{color: '#fff'}}/>
                                 수정 취소
                             </button>
                         </div>

@@ -5,8 +5,8 @@ import testJson from 'test.json';
 import TodoListModal from 'components/todoListModal';
 
 const TodoList: React.FC = () => {
-    const [todoValues, setTodoValues] = useState('');
-    const [formValues, setFormValues] = useState('');
+    const [todoValues, setTodoValues] = useState<string>('');
+    const [formValues, setFormValues] = useState<string>('');
 
     const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
@@ -20,7 +20,7 @@ const TodoList: React.FC = () => {
         console.log('handleChange')
     }
 
-    const [modalView, setModalView] = useState(false);
+    const [modalView, setModalView] = useState<boolean>(false);
 
     return (
         <div className={styles.todo}>
