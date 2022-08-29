@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 
-import styles from '../styles/Home.module.scss'
-import testJson from '../test.json';
-import TodoListModal from '../components/todoListModal';
+import styles from 'styles/Home.module.scss'
+import testJson from 'test.json';
+import TodoListModal from 'components/todoListModal';
 
-const TodoList : React.FC = () => {
+const TodoList: React.FC = () => {
     const [todoValues, setTodoValues] = useState('');
     const [formValues, setFormValues] = useState('');
 
@@ -13,7 +13,7 @@ const TodoList : React.FC = () => {
         console.log('handleSubmit')
     };
 
-    const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         const {name, value} = e.target;
         setTodoValues(value);

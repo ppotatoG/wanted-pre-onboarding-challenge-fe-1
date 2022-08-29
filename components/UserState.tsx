@@ -1,9 +1,10 @@
-import styles from '../styles/Home.module.scss'
+import styles from 'styles/Home.module.scss'
 
 interface isUserType {
     isUser: string | null
 }
-const UserState = (isUser : isUserType) : JSX.Element | React.FC => {
+
+const UserState = (isUser: isUserType): JSX.Element | React.FC => {
     const logout = () => {
         localStorage.removeItem('isUser')
         alert('setTimeout');

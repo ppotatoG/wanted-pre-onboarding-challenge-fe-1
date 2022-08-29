@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, {useState, useEffect, useCallback} from "react";
 
-import { FaBeer } from 'react-icons/fa';
-import styles from '../styles/Home.module.scss'
-import testJson from '../test.json';
+import {FaBeer} from 'react-icons/fa';
 
-const TodoListModal = ( { modalView, setModalView } ) => {
+import styles from 'styles/Home.module.scss'
+import testJson from 'test.json';
+
+const TodoListModal = ({modalView, setModalView}) => {
     const [reviseList, setReviseList] = useState(false);
 
     const [content, setContent] = useState('');

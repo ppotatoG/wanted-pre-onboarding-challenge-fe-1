@@ -1,9 +1,8 @@
 import React, {useState} from "react";
-
-import styles from '../styles/Home.module.scss'
 import axios from 'axios';
 
-import {EmailPattern} from '../utils/pattern';
+import styles from 'styles/Home.module.scss'
+import {EmailPattern} from 'utils/pattern';
 
 const SignUp: React.FC = () => {
     // TODO: 중복코드 common
@@ -57,10 +56,10 @@ const SignUp: React.FC = () => {
             axios.post('http://localhost:8080/users/create', {
                 email: email,
                 password: password
-            }).then( response => {
+            }).then(response => {
                 console.log(response)
                 console.log(response.data.message)
-            }).catch( error => {
+            }).catch(error => {
                 console.log(error)
                 console.log(error.response.data.details)
             })

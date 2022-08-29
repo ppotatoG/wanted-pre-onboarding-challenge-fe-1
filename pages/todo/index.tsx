@@ -6,7 +6,7 @@ import TodoList from 'components/TodoList';
 import SignIn from 'components/SignIn';
 import UserState from 'components/UserState';
 
-import testJson from '../../test.json';
+import testJson from 'test.json';
 
 const Todo: React.FC = () => {
     let isUser : string | null = null;
