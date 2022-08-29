@@ -139,7 +139,6 @@ $error-color: #f51b39;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 50px;
     &__bg {
         position: absolute;
         top: 0;
@@ -155,17 +154,10 @@ $error-color: #f51b39;
         width: 100%;
         max-width: 600px;
         height: 40vh;
-        overflow-y: auto;
         margin: 0 auto;
         background: #fff;
         padding: 20px;
-    }
-}
-
-.todoCard_none {
-    display: none;
-    * {
-        display: none;
+        position: relative;
     }
 }
 
@@ -177,14 +169,14 @@ $error-color: #f51b39;
 
 .btn_wrap {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     gap: 20px;
     align-items: center;
     margin-top: 30px;
     &__item {
         width: fit-content;
         display: block;
-        padding: 10px 40px;
+        padding: 10px 20px;
         background: $point-color;
         color: #fff;
         text-align: center;

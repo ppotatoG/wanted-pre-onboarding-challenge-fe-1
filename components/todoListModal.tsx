@@ -1,14 +1,17 @@
 import React, {useState, useEffect, useCallback} from "react";
 
-import {FaBeer} from 'react-icons/fa';
-
 import styles from 'styles/Home.module.scss'
+import styled from "styled-components";
+
 import testJson from 'test.json';
+
+import { faXmark, faTrashCan, faBan, faFileArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const TodoListModal = ({modalView, setModalView}) => {
     const [reviseList, setReviseList] = useState(false);
 
-    const [content, setContent] = useState('');
+    const [content, setContent] = useState(testJson.todos[0].data.content);
     const [contentError, setContentError] = useState(false);
 
     const updateTodo = () => {
@@ -43,34 +46,70 @@ const TodoListModal = ({modalView, setModalView}) => {
         <div className={styles.todoCard}>
             <div className={styles.todoCard__bg} onClick={() => setModalView(false)}></div>
             <div className={styles.todoCard__contents}>
-                <button onClick={() => setModalView(false)}>닫기</button>
-                <p>{testJson.todos[0].data.title}</p>
+                <CloseButton onClick={() => setModalView(false)}>
+                    <FontAwesomeIcon icon={faXmark} style={{color: '#fff'}} size='2x'/>
+                </CloseButton>
+                <ModalTitle>{testJson.todos[0].data.title}</ModalTitle>
+
                 {
                     reviseList
                     &&
                     <div>
-                        <input
+                        <ModalInput
                             type="text"
-                            placeholder="할 일을 입력하세요"
                             required
                             onChange={onChangeContent}
-                            defaultValue={testDefaultValue ? testDefaultValue : content}
+                            value={content}
                         />
                         <div className={styles.btn_wrap}>
-                            <button className={styles.btn_wrap__item} onClick={updateTodo}>수정 후 제출</button>
-                            <button className={styles.btn_wrap__item} onClick={deleteTodo}><FaBeer/></button>
-                            <button className={styles.btn_wrap__item} onClick={handleReviseCancle}>수정 취소</button>
+                            <button className={styles.btn_wrap__item} onClick={updateTodo}>
+                                <FontAwesomeIcon icon={faFileArrowUp} style={{color: '#fff'}, {marginRight: '10px'}}/>
+                                수정
+                            </button>
+                            <button className={styles.btn_wrap__item} onClick={deleteTodo}>
+                                <FontAwesomeIcon icon={faTrashCan} style={{color: '#fff'}, {marginRight: '10px'}}/>
+                                삭제
+                            </button>
+                            <button className={styles.btn_wrap__item} onClick={handleReviseCancle}>
+                                <FontAwesomeIcon icon={faBan} style={{color: '#fff'}, {marginRight: '10px'}}/>
+                                수정 취소
+                            </button>
                         </div>
                     </div>
                     ||
                     <div>
-                        <p>{testJson.todos[0].data.content}</p>
-                        <button onClick={handleRevise}>수정</button>
+                        <ModalText>{testJson.todos[0].data.content}</ModalText>
+                        <div className={styles.btn_wrap}>
+                            <button className={`${styles.btn_wrap__item} edit`} onClick={handleRevise} >수정</button>
+                        </div>
                     </div>
                 }
             </div>
         </div>
     )
 }
+
+const ModalTitle = styled.h3`
+    font-size: 24px;
+`;
+
+const CloseButton = styled.button`
+    position: absolute;
+    top: -40px;
+    right: 0;
+`;
+
+const ModalInput = styled.input`
+    padding-top: 10px;
+    font-size: 18px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+`;
+
+const ModalText = styled.p`
+    padding-top: 10px;
+    font-size: 20px;
+`;
 
 export default TodoListModal;
