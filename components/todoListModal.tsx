@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import testJson from 'test.json';
 
-import { faXmark, faTrashCan, faBan, faFileArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { faXmark, faTrashCan, faBan, faFileArrowUp, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface props {
@@ -85,7 +85,10 @@ const TodoListModal : React.FC<props> = ({modalView, setModalView}) : any => {
                     <div>
                         <ModalText>{testJson.todos[0].data.content}</ModalText>
                         <div className={styles.btn_wrap}>
-                            <button className={`${styles.btn_wrap__item} edit`} onClick={handleRevise} >수정</button>
+                            <button className={styles.btn_wrap__item} onClick={handleRevise}>
+                                <FontAwesomeIcon icon={faPenToSquare} style={{color: '#fff'}}/>
+                                수정
+                            </button>
                         </div>
                     </div>
                 }
