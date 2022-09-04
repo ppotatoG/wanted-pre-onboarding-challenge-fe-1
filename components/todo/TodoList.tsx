@@ -2,7 +2,7 @@ import React, {useState} from "react";
 
 import styles from 'styles/Home.module.scss'
 import testJson from 'test.json';
-import TodoListModal from 'components/todoListModal';
+import TodoListModal from './todoListModal';
 
 const TodoList: React.FC = () => {
     const [todoValues, setTodoValues] = useState<string>('');

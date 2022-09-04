@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import styles from 'styles/Home.module.scss'
 
-import TodoList from 'components/TodoList';
-import SignIn from 'components/SignIn';
+import TodoList from 'components/todo/TodoList';
+import SignIn from 'components/auth/SignIn';
 import UserState from 'components/UserState';
 
 import testJson from 'test.json';

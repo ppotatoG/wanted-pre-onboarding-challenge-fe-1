@@ -3,10 +3,10 @@ import React, {useState, useEffect, useCallback} from "react";
 import styles from 'styles/Home.module.scss'
 import styled from "styled-components";
 
-import testJson from 'test.json';
+import testJson from '../../test.json';
 
-import { faXmark, faTrashCan, faBan, faFileArrowUp, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark, faTrashCan, faBan, faFileArrowUp, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 interface props {
     modalView: boolean,

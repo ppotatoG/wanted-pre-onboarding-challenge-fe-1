@@ -1,10 +1,13 @@
 import React, {useState} from "react";
-import axios from 'axios';
 
 import styles from 'styles/Home.module.scss'
+import axios from 'axios';
+
 import {EmailPattern} from 'utils/pattern';
 
-const SignIn: React.FC = () => {
+const SignUp: React.FC = () => {
+    // TODO: 중복코드 common
+
     const [email, setEmail] = useState<string>('');
     const [emailError, setEmailError] = useState<boolean>(false);
     const [emailErrorMessage, setEmailErrorMessage] = useState<string | ''>('');
@@ -50,23 +53,18 @@ const SignIn: React.FC = () => {
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
 
-        await axios.post('http://localhost:8080/users/login', {
-            email: email,
-            password: password
-        }).then((response) => {
-            // TODO: todolist로 이동 (refresh)
-            console.log(response.data.token)
-            console.log(response)
-            localStorage.setItem('isUser', response.data.token);
-
-            alert('setTimeout');
-            setTimeout(() => {
-                window.location.reload();
-            }, 500)
-            // alert(response.data.message);
-        }).catch((error) => {
-            // alert(error.response.data.details);
-        })
+        if (emailError && passwordError) {
+            axios.post('http://localhost:8080/users/create', {
+                email: email,
+                password: password
+            }).then( response => {
+                console.log(response)
+                console.log(response.data.message)
+            }).catch( error => {
+                console.log(error)
+                console.log(error.response.data.details)
+            })
+        }
     }
 
     return (
@@ -109,4 +107,4 @@ const SignIn: React.FC = () => {
     )
 };
 
-export default SignIn;
+export default SignUp;
