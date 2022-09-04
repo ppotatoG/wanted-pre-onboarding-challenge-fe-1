@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from 'styles/Home.module.scss'
-import SignUp from 'components/SignUp';
+import SignUp from 'components/auth/SignUp';
 
 const App: React.FC = () => {
     return (

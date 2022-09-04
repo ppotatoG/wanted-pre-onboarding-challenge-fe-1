@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from 'styles/Home.module.scss'
-import SignIn from 'components/SignIn';
+import SignIn from 'components/auth/SignIn';
 
 const App: React.FC = () => {
     return (
