@@ -1,10 +1,15 @@
 import React, {useState} from "react";
+import { useAppDispatch, useAppSelector } from 'components/store/hook';
 
 import styles from 'styles/Home.module.scss'
 import testJson from 'test.json';
 import TodoListModal from './todoListModal';
+import type { RootState } from 'components/store/store';
 
 const TodoList: React.FC = () => {
+    const todo = useAppSelector((state) => state.todo.value);
+    const dispatch = useAppDispatch;
+
     const [todoValues, setTodoValues] = useState<string>('');
     const [formValues, setFormValues] = useState<string>('');
 
