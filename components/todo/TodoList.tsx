@@ -5,10 +5,10 @@ import styles from 'styles/Home.module.scss'
 import testJson from 'test.json';
 import TodoListModal from './todoListModal';
 import type { RootState } from 'components/store/store';
-경import { decrement, increment } from 'components/todo/slice';
 
 const TodoList: React.FC = () => {
     console.log('todolist')
+
     const todo = useAppSelector((state) => state.todo.value);
     const dispatch = useAppDispatch();
 
@@ -29,8 +29,16 @@ const TodoList: React.FC = () => {
 
     const [modalView, setModalView] = useState<boolean>(false);
 
+    const testFnc = () => {
+        console.log('click');
+        console.log(increment)
+        dispatch(increment());
+    }
+
     return (
         <div className={styles.todo}>
+            <button onClick={() => dispatch(increment())}>button</button>
+            <p>{todo}</p>
             <form className={styles.todo__form}>
                 <input
                     type="text"
@@ -55,9 +63,6 @@ const TodoList: React.FC = () => {
                 modalView={modalView}
                 setModalView={setModalView}
             />
-
-            <div>test : {todo}</div>
-            <button onClick={() => dispatch(increment())}>button</button>
         </div>
     )
 }
