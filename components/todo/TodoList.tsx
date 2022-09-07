@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import { useAppDispatch, useAppSelector } from 'components/store/hook';
 
+import { increment } from 'components/todo/slice';
+
 import styles from 'styles/Home.module.scss'
 import testJson from 'test.json';
 import TodoListModal from './todoListModal';
@@ -28,12 +30,6 @@ const TodoList: React.FC = () => {
     }
 
     const [modalView, setModalView] = useState<boolean>(false);
-
-    const testFnc = () => {
-        console.log('click');
-        console.log(increment)
-        dispatch(increment());
-    }
 
     return (
         <div className={styles.todo}>
