@@ -18,8 +18,12 @@ const getTodos = createAsyncThunk(
     'users/fetchById',
     // if you type your function argument here
     async (userId: number) => {
-        const response = await axios.get(`http://localhost:8080/todos`)
-        return (await response.json()) as Returned
+        try {
+            const response = await axios.get(`http://localhost:8080/todos`);
+            return (await response.json()) as Returned
+        } catch(e) {
+            alert(e);
+        }
     }
 )
 
