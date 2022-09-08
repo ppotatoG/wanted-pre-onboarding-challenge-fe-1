@@ -1,9 +1,9 @@
 import type {NextPage} from 'next'
 
 import Head from 'next/head'
-import styles from 'styles/Home.module.scss'
+import styles from '@styles/Home.module.scss'
 
-import Todo from 'pages/todo';
+import Todo from '@pages/todo';
 
 const Home: NextPage = () => {
     return (

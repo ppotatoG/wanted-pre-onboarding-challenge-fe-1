@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 
-import styles from 'styles/Home.module.scss'
+import styles from '@styles/Home.module.scss'
 import axios from 'axios';
 
-import {EmailPattern} from 'utils/pattern';
+import {EmailPattern} from '@utils/pattern';
 
 const SignUp: React.FC = () => {
     // TODO: 중복코드 common

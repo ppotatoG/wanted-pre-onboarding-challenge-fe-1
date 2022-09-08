@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import { useAppDispatch, useAppSelector } from 'components/store/hook';
+import { useAppDispatch, useAppSelector } from '@components/store/hook';
 
-// import { increment } from 'components/todo/slice';
+// import { increment } from '@components/todo/slice';
 
-import styles from 'styles/Home.module.scss'
+import styles from '@styles/Home.module.scss'
 import testJson from 'test.json';
 import TodoListModal from './todoListModal';
 // import type { RootState } from 'components/store/rootReducer';

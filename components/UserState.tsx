@@ -1,4 +1,4 @@
-import styles from 'styles/Home.module.scss'
+import styles from '@styles/Home.module.scss'
 
 interface isUserType {
     isUser: string | null
