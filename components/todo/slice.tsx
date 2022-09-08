@@ -2,8 +2,24 @@ import {createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { RootState } from 'components/store/store';
 import axios from 'axios';
 
+interface ThunkAPI {
+    dispatch: Function
+    getState: Function
+    extra?: any
+    requestId: string
+    signal: AbortSignal
+}
+
+interface TodoData {
+    title: string,
+    content: string,
+    id: string,
+    createdAt: string,
+    updatedAt: string
+}
+
 interface TodoState {
-    data: null | Object,
+    data: null | TodoData,
     error: null | Object,
     loading: boolean
 };
