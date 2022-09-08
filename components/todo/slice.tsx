@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import type { RootState } from 'components/store/store';
+import type { RootState } from 'components/store/rootReducer';
 import axios from 'axios';
 
 interface ThunkAPI {
