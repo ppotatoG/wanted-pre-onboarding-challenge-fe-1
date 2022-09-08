@@ -8,10 +8,8 @@ const nextConfig = {
       alias: {
         '@components': path.resolve(__dirname, './components'),
         '@pages': path.resolve(__dirname, './pages'),
-        '@public': path.resolve(__dirname, './public'),
         '@styles': path.resolve(__dirname, './styles'),
         '@types': path.resolve(__dirname, './types'),
-        '@utils': path.resolve(__dirname, './utils'),
       },
       ...config.resolve
     };
