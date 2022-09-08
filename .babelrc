@@ -2,11 +2,19 @@
   "presets": ["next/babel"],
   "plugins": [
     [
-      "babel-plugin-styled-components",
+      "module-resolver",
       {
         "ssr": true,
         "displayName": true,
-        "pure": true
+        "pure": true,
+        "alias": {
+          "@components": "./components",
+          "@pages": "./pages",
+          "@public": "./public",
+          "@styles": "./styles",
+          "@types": "./types",
+          "@utils": "./utils"
+        }
       }
     ]
   ]

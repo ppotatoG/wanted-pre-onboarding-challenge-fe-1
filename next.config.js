@@ -1,9 +1,20 @@
 /** @type {import('next').NextConfig} */
+const path = require('path');
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  webpack(config) {
-    config.resolve.modules.push(__dirname);
+  webpack(config, { webpack }) {
+    config.resolve = {
+      alias: {
+        '@components': path.resolve(__dirname, './components'),
+        '@pages': path.resolve(__dirname, './pages'),
+        '@public': path.resolve(__dirname, './public'),
+        '@styles': path.resolve(__dirname, './styles'),
+        '@types': path.resolve(__dirname, './types'),
+        '@utils': path.resolve(__dirname, './utils'),
+      },
+      ...config.resolve
+    };
     return config;
   }
 }
