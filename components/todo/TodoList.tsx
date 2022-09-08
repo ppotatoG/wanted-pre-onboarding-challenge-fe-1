@@ -1,18 +1,18 @@
 import React, {useState} from "react";
 import { useAppDispatch, useAppSelector } from 'components/store/hook';
 
-import { increment } from 'components/todo/slice';
+// import { increment } from 'components/todo/slice';
 
 import styles from 'styles/Home.module.scss'
 import testJson from 'test.json';
 import TodoListModal from './todoListModal';
-import type { RootState } from 'components/store/store';
+// import type { RootState } from 'components/store/rootReducer';
 
 const TodoList: React.FC = () => {
     console.log('todolist')
 
-    const todo = useAppSelector((state) => state.todo.value);
-    const dispatch = useAppDispatch();
+    // const todo = useAppSelector((state) => state.todo.value);
+    // const dispatch = useAppDispatch();
 
     const [todoValues, setTodoValues] = useState<string>('');
     const [formValues, setFormValues] = useState<string>('');
@@ -33,8 +33,8 @@ const TodoList: React.FC = () => {
 
     return (
         <div className={styles.todo}>
-            <button onClick={() => dispatch(increment())}>button</button>
-            <p>{todo}</p>
+            {/*<button onClick={() => dispatch(increment())}>button</button>*/}
+            {/*<p>{todo}</p>*/}
             <form className={styles.todo__form}>
                 <input
                     type="text"
