@@ -1,16 +1,13 @@
 import React, {useState} from "react";
 import Modal from 'react-modal';
 
-const CustomModal = () => {
+import styles from '@styles/Home.module.scss'
+
+const CustomModal = ({text} : any ) => {
     const [modalIsOpen, setIsOpen] = useState(true);
 
-    function openModal() {
-        setIsOpen(true);
-    }
-
-    function closeModal() {
-        setIsOpen(false);
-    }
+    const openModal = () => setIsOpen(true);
+    const closeModal = () => setIsOpen(false);
 
     return (
         <div>
@@ -19,10 +16,11 @@ const CustomModal = () => {
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 style={customStyles}
-                contentLabel="Example Modal"
             >
-                <button onClick={closeModal}>close</button>
-                <div>I am a modal</div>
+                <p>{text}</p>
+                <div className={styles.btn_wrap}>
+                    <button className={styles.btn_wrap__item} onClick={closeModal}>확인 </button>
+                </div>
             </Modal>
         </div>
     );
@@ -30,6 +28,7 @@ const CustomModal = () => {
 
 const customStyles = {
     content: {
+        minWidth: '300px',
         top: '50%',
         left: '50%',
         right: 'auto',

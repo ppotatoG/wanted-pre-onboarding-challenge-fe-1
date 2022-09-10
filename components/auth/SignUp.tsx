@@ -104,7 +104,7 @@ const SignUp: React.FC = () => {
                 </button>
             </div>
 
-            <CustomModal />
+            <CustomModal text={'메롱!'}/>
         </form>
     )
 };
