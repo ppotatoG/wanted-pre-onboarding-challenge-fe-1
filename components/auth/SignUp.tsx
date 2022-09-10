@@ -99,9 +99,8 @@ const SignUp: React.FC = () => {
                 <button
                     disabled={!emailError || !passwordError}
                     className={styles.btn_wrap__item}>
-                    로그인
+                    회원가입
                 </button>
-                <a className={styles.btn_wrap__item} href="../auth/SignUp">회원가입</a>
             </div>
         </form>
     )
