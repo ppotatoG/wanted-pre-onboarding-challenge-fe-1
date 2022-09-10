@@ -2,6 +2,7 @@ import React, {useState} from "react";
 
 import styles from '@styles/Home.module.scss'
 import axios from 'axios';
+import CustomModal from '@components/modal';
 
 import {EmailPattern} from '@utils/pattern';
 
@@ -102,6 +103,8 @@ const SignUp: React.FC = () => {
                     회원가입
                 </button>
             </div>
+
+            <CustomModal />
         </form>
     )
 };
