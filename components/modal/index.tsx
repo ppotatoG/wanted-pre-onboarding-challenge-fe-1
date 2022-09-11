@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 
 import styles from '@styles/Home.module.scss'
 
-const CustomModal = ({text, modalIsOpen, setIsOpen}) => {
+const CustomModal = ({text, modalIsOpen, setIsOpen} : any) => {
     return (
         <div>
             <Modal

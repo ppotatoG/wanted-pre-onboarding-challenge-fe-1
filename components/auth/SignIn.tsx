@@ -2,6 +2,7 @@ import React, {useState} from "react";
 
 import styles from '@styles/Home.module.scss'
 import axios from 'axios';
+import CustomModal from '@components/modal';
 
 import {EmailPattern} from '@utils/pattern';
 
@@ -13,6 +14,9 @@ const SignIn: React.FC = () => {
     const [password, setPassword] = useState<string>('');
     const [passwordError, setPasswordError] = useState<boolean>(false);
     const [passwordErrorMessage, setPasswordErrorMessage] = useState<string | ''>('');
+
+    const [modalText, setModalText] = useState<string>('');
+    const [modalIsOpen, setIsOpen] = useState<boolean>(false);
 
     const onChangeEmailCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target;
@@ -48,6 +52,11 @@ const SignIn: React.FC = () => {
         return '';
     };
 
+    const modalOpen = (text : string) => {
+        setIsOpen(true);
+        setModalText(text);
+    }
+
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
 
@@ -56,17 +65,14 @@ const SignIn: React.FC = () => {
             password: password
         }).then((response) => {
             // TODO: todolist로 이동 (refresh)
-            console.log(response.data.token)
             console.log(response)
+            console.log(response.data.token)
             localStorage.setItem('isUser', response.data.token);
 
-            alert('setTimeout');
-            setTimeout(() => {
-                window.location.reload();
-            }, 500)
-            // alert(response.data.message);
+            modalOpen(response.data.message);
         }).catch((error) => {
-            // alert(error.response.data.details);
+            console.log(error)
+            modalOpen(error.response.data.details);
         })
     }
 
@@ -106,6 +112,15 @@ const SignIn: React.FC = () => {
                 </button>
                 <a className={styles.btn_wrap__item} href="../auth/SignUp">회원가입</a>
             </div>
+
+            {
+                modalIsOpen &&
+                <CustomModal
+                    text={modalText}
+                    modalIsOpen={modalIsOpen}
+                    setIsOpen={setIsOpen}
+                />
+            }
         </form>
     )
 };
