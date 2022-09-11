@@ -3,23 +3,18 @@ import Modal from 'react-modal';
 
 import styles from '@styles/Home.module.scss'
 
-const CustomModal = ({text} : any ) => {
-    const [modalIsOpen, setIsOpen] = useState(true);
-
-    const openModal = () => setIsOpen(true);
-    const closeModal = () => setIsOpen(false);
-
+const CustomModal = ({text, modalIsOpen, setIsOpen}) => {
     return (
         <div>
-            <button onClick={openModal}>Open Modal</button>
             <Modal
                 isOpen={modalIsOpen}
-                onRequestClose={closeModal}
+                ariaHideApp={false}
+                onRequestClose={() => setIsOpen(false)}
                 style={customStyles}
             >
                 <p>{text}</p>
                 <div className={styles.btn_wrap}>
-                    <button className={styles.btn_wrap__item} onClick={closeModal}>확인 </button>
+                    <button className={styles.btn_wrap__item} onClick={() => setIsOpen(false)}>확인 </button>
                 </div>
             </Modal>
         </div>

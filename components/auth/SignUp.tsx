@@ -17,6 +17,9 @@ const SignUp: React.FC = () => {
     const [passwordError, setPasswordError] = useState<boolean>(false);
     const [passwordErrorMessage, setPasswordErrorMessage] = useState<string | ''>('');
 
+    const [modalText, setModalText] = useState<string>('');
+    const [modalIsOpen, setIsOpen] = useState<boolean>(false);
+
     const onChangeEmailCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target;
 
@@ -51,6 +54,11 @@ const SignUp: React.FC = () => {
         return '';
     };
 
+    const modalOpen = (text : string) => {
+        setIsOpen(true);
+        setModalText(text);
+    }
+
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
 
@@ -60,10 +68,10 @@ const SignUp: React.FC = () => {
                 password: password
             }).then( response => {
                 console.log(response)
-                console.log(response.data.message)
+                modalOpen(response.data.message);
             }).catch( error => {
                 console.log(error)
-                console.log(error.response.data.details)
+                modalOpen(error.response.data.details);
             })
         }
     }
@@ -104,7 +112,14 @@ const SignUp: React.FC = () => {
                 </button>
             </div>
 
-            <CustomModal text={'메롱!'}/>
+            {
+                modalIsOpen &&
+                <CustomModal
+                    text={modalText}
+                    modalIsOpen={modalIsOpen}
+                    setIsOpen={setIsOpen}
+                />
+            }
         </form>
     )
 };
