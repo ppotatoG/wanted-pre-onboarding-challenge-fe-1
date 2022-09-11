@@ -1,30 +1,19 @@
 import React, { useState, useEffect } from "react";
 
-import styles from '@styles/Home.module.scss'
-
 import TodoList from '@components/todo/TodoList';
 import SignIn from '@components/auth/SignIn';
-import UserState from '@components/UserState';
 
-import testJson from 'test.json';
+import styles from '@styles/Home.module.scss'
 
 const Todo: React.FC = () => {
-    let isUser : string | null = null;
-
-    useEffect(() => {
-        isUser = localStorage.isUser;
-        // console.log(isUser !== null);
-    },[isUser]);
+    // console.log(localStorage.getItem('isUer'))
+    // 가져오는 시점에 따라 값이 달라짐
+    // redux 사용하여 공유 가능한 상태값 사용?
 
     return (
         <article className={styles.article}>
-            <UserState isUser={isUser} />
             <h2>TODO LIST</h2>
-            {
-                isUser
-                || <SignIn/>
-                && <TodoList/>
-            }
+                <SignIn/>
         </article>
     )
 };
