@@ -14,7 +14,8 @@ export default function UseAuthForm (
         modalIsOpen,
         setIsOpen,
         modalText,
-        onSubmit
+        onSubmit,
+        isUser
     } : any
 ){
     const [emailError, setEmailError] = useState<boolean>(false);
@@ -83,14 +84,18 @@ export default function UseAuthForm (
                     onChange={onChangePasswordCheck}
                 />
             </div>
+
             {passwordErrorMessage && <p className={styles.errorMessage}>{passwordErrorMessage}</p>}
 
             <div className={styles.btn_wrap}>
-                <button
-                    disabled={!emailError || !passwordError}
-                    className={styles.btn_wrap__item}>
-                    로그인
-                </button>
+                {
+                    isUser &&
+                    <button
+                        disabled={!emailError || !passwordError}
+                        className={styles.btn_wrap__item}>
+                        로그인
+                    </button>
+                }
                 <a className={styles.btn_wrap__item} href="../auth/SignUp">회원가입</a>
             </div>
 

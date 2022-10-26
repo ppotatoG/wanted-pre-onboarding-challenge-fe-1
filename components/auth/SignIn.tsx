@@ -44,6 +44,7 @@ const SignIn: React.FC = () => {
             onSubmit={onSubmit}
             modalText={modalText}
             setModalText={setModalText}
+            isUser={true}
         />
     )
 };

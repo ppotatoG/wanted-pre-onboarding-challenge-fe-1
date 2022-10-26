@@ -40,6 +40,7 @@ const SignUp: React.FC = () => {
             onSubmit={onSubmit}
             modalText={modalText}
             setModalText={setModalText}
+            isUser={false}
         />
     )
 };
