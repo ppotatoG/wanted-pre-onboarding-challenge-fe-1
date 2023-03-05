@@ -17,6 +17,8 @@ const SignUp: React.FC = () => {
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
 
+        console.log(e)
+
         axios.post('http://localhost:8080/users/create', {
             email: email,
             password: password

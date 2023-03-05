@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import styles from '@styles/Home.module.scss'
 import CustomModal from '@components/modal';
@@ -19,10 +19,10 @@ export default function UseAuthForm (
     } : any
 ){
     const [emailError, setEmailError] = useState<boolean>(false);
-    const [emailErrorMessage, setEmailErrorMessage] = useState<string | ''>('');
+    const [emailErrorMessage, setEmailErrorMessage] = useState<string>('');
 
     const [passwordError, setPasswordError] = useState<boolean>(false);
-    const [passwordErrorMessage, setPasswordErrorMessage] = useState<string | ''>('');
+    const [passwordErrorMessage, setPasswordErrorMessage] = useState<string>('');
     
     const onChangeEmailCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target;
@@ -57,6 +57,10 @@ export default function UseAuthForm (
 
         return '';
     };
+
+    useEffect(() => {
+
+    }, [email, emailError, emailErrorMessage, password, passwordError, passwordErrorMessage])
     
     return (
         <form className={styles.auth} onSubmit={onSubmit}>
@@ -96,7 +100,7 @@ export default function UseAuthForm (
                         로그인
                     </button>
                 }
-                <a className={styles.btn_wrap__item} href="../auth/SignUp">회원가입</a>
+                <button className={styles.btn_wrap__item} type="submit">회원가입</button>
             </div>
 
             {

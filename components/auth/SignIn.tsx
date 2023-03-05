@@ -16,11 +16,13 @@ const SignIn: React.FC = () => {
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
+        console.log()
 
         await axios.post('http://localhost:8080/users/login', {
             email: email,
             password: password
         }).then((response) => {
+            console.log(response)
             // TODO: todolist로 이동 (refresh)
             console.log(response)
             console.log(response.data.token)
@@ -28,6 +30,7 @@ const SignIn: React.FC = () => {
 
             modalOpen(response.data.message);
         }).catch((error) => {
+            console.log(error)
             console.log(error)
             modalOpen(error.response.data.details);
         })

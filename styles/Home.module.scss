@@ -5,7 +5,7 @@ $error-color: #f51b39;
 
 .article {
     min-height: 100vh;
-    padding: 50px 0;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,7 +13,7 @@ $error-color: #f51b39;
     flex-wrap: wrap;
     gap: 50px;
     width: 100%;
-    max-width: 1000px;
+    max-width: 700px;
     margin: 0 auto;
     box-sizing: border-box;
     position: relative;
@@ -40,7 +40,6 @@ $error-color: #f51b39;
         display: flex;
         align-items: center;
         gap: 2vw;
-        padding: 0 12vw;
         label {
             flex: 1 1 30%;
             color: $point-color;
@@ -173,7 +172,7 @@ $error-color: #f51b39;
     gap: 20px;
     align-items: center;
     margin-top: 30px;
-    &__item {
+    > *{
         width: fit-content;
         display: block;
         padding: 10px 20px;
